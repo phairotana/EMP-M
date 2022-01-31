@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group(
+    [
+        'namespace'  => 'App\Http\Controllers',
+        // 'middleware' => config('backpack.base.web_middleware', 'web'),
+        'prefix'     => 'admin',
+    ],
+    function () {
+        // if not otherwise configured, setup the auth routes
+            // Authentication Routes...
+            Route::post('login', 'Auth\LoginController@login');
+            Route::post('logout', 'Auth\LoginController@logout');
+
+            Route::get('dashboard', 'AdminController@dashboard');
+
+    });

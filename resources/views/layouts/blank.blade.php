@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
-   @include('inc.head')
-
+    <title>EMP MANAGE</title>
+    @include('inc.head')
+    @include('inc.favicon')
 </head>
 
-<body>
+<body class="app aside-menu-fixed sidebar-lg-show">
+    <div id="main-header">
+        @include('inc.main_header')
+    </div>
+    <div class="app-body" id="main-body">
 
-<div class="container">
+        @include('inc.sidebar')
 
-   <header class="row">
+        <main class="main pt-2">
+            <div class="container-fluid animated fadeIn">
+                @yield('content')
+            </div>
 
-       @include('includes.header')
+        </main>
 
-   </header>
+    </div><!-- ./app-body -->
+    <footer class="app-footer">
+        @include('inc.footer')
+    </footer>
 
-   <div id="main" class="row">
-
-           @yield('content')
-
-   </div>
-
-   <footer class="row">
-
-       @include('includes.footer')
-
-   </footer>
-
-</div>
+    @include('inc.scripts')
 
 </body>
 
