@@ -16,6 +16,9 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function() {
+    return redirect('login');
+})->name('login');
 
 Route::group(
     [
