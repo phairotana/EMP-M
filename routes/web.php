@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\Auth\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +21,31 @@ Route::group(
     [
         'namespace'  => 'App\Http\Controllers',
         // 'middleware' => config('backpack.base.web_middleware', 'web'),
-        'prefix'     => 'admin',
+        'prefix'     => '/',
     ],
     function () {
-        // if not otherwise configured, setup the auth routes
-            // Authentication Routes...
-            Route::post('login', 'Auth\LoginController@login');
-            Route::post('logout', 'Auth\LoginController@logout');
 
-            Route::get('dashboard', 'AdminController@dashboard');
+        Route::get('login', 'Auth\UserController@loginForm')->name('login');
+        Route::post('logme-in', 'Auth\UserController@login');
+
+        Route::get('register', 'Auth\RegisterController@frmRegister');
+        Route::post('register-me', 'Auth\RegisterController@register');
 
     });
+
+Route::group(
+    [
+        'namespace'  => 'App\Http\Controllers',
+        // 'middleware' => config('backpack.base.web_middleware', 'web'),
+        'prefix'     => 'Admin',
+    ],
+    function () {
+        Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+
+        // Route::get('user-list', Auth\UserController::class, 'index');
+        Route::get('user', 'Auth\UserController@userForm');
+        Route::post('user/create', 'Auth\UserController@createUser');
+
+        Route::resource('user-list', Auth\AuthenticateController::class);
+    });
+

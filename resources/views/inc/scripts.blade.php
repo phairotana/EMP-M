@@ -1,3 +1,4 @@
+
 @foreach (config('pr-base.base.scripts') as $path)
     <script type="text/javascript" src="{{ asset($path) }}"></script>
 @endforeach
