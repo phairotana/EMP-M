@@ -47,8 +47,10 @@ Route::group(
 
         // Route::get('user-list', Auth\UserController::class, 'index');
         Route::get('user', 'Auth\UserController@userForm');
-        Route::post('user/create', 'Auth\UserController@createUser');
+        Route::post('user/create', 'Auth\UserController@createUser')->name('Admin.user.create');
+        Route::get('user-list', 'Auth\UserController@show');
 
-        Route::resource('user-list', Auth\AuthenticateController::class);
+        // Route::get('adduser', 'Auth\UserController@FormUser');
+        // Route::post('user', 'Auth\UserController@createUser');
     });
 

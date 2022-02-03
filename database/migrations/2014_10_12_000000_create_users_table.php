@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('email')->nullable();
             $table->string('password')->nullable();
+            $table->string('confirm_password')->nullable();
             $table->timestamps();
         });
     }
