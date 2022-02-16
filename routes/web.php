@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\DepartmentController;
+
 
 
 /*
@@ -40,17 +42,46 @@ Route::group(
     [
         'namespace'  => 'App\Http\Controllers',
         // 'middleware' => config('backpack.base.web_middleware', 'web'),
-        'prefix'     => 'Admin',
+        'prefix'     => 'admin',
     ],
     function () {
         Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 
-        // Route::get('user-list', Auth\UserController::class, 'index');
-        Route::get('user', 'Auth\UserController@userForm');
-        Route::post('user/create', 'Auth\UserController@createUser')->name('Admin.user.create');
-        Route::get('user-list', 'Auth\UserController@show');
 
-        // Route::get('adduser', 'Auth\UserController@FormUser');
-        // Route::post('user', 'Auth\UserController@createUser');
+        Route::get('user', 'Auth\UserController@userForm');
+        Route::post('user/create', 'Auth\UserController@createUser')->name('admin.user.create');
+        Route::get('user-list', 'Auth\UserController@list');
+        Route::get('user-list/{id}', 'Auth\UserController@destroy');
+        Route::get('user/{id}/show', 'Auth\UserController@show');
+        Route::get('user/{id}/edit', 'Auth\UserController@edit');
+
+        Route::post('user/{id}/update', 'Auth\UserController@update');
+//
+        Route::get('department/list', 'DepartmentController@index');
+        Route::get('department/create', 'DepartmentController@create');
+        Route::post('department/store','DepartmentController@store')->name('admin.department.store');
+        Route::get('department/{id}/show', 'DepartmentController@show');
+        Route::get('department/{id}/edit', 'DepartmentController@edit');
+        Route::post('department/{id}/update', 'DepartmentController@update');
+        Route::get('department-list/{id}', 'DepartmentController@destroy');
+//
+
+        Route::get('employee/list', 'EmployeeController@index');
+        Route::get('employee/create', 'EmployeeController@create');
+        Route::post('employee/store','EmployeeController@store');
+        Route::get('employee/{id}/show', 'EmployeeController@show');
+        Route::get('employee/{id}/edit', 'EmployeeController@edit');
+        Route::post('employee/{id}/update', 'EmployeeController@update');
+        Route::get('employee-list/{id}', 'EmployeeController@destroy');
+//
+        Route::get('salary/list', 'SalaryController@index');
+        Route::get('salary/create', 'SalaryController@create');
+        Route::post('salary/store', 'SalaryController@store')->name('admin.salary.store');
+        Route::get('salary/{id}/show', 'SalaryController@show');
+        Route::get('salary/{id}/edit', 'SalaryController@edit');
+        Route::post('salary/{id}/update', 'SalaryController@update');
+        Route::get('salary-list/{id}', 'SalaryController@destroy');
+
     });
+
 

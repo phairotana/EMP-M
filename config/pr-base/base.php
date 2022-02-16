@@ -20,6 +20,7 @@ return [
         'css/bundle.css',
         // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
+        'css/lightbox.css'
     ],
 
     // -------
@@ -30,5 +31,6 @@ return [
     'scripts' => [
         // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
         'js/bundle.js',
+        'js\lightbox.js'
     ],
 ];

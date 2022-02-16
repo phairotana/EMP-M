@@ -10,6 +10,7 @@
         body {
             background-color: rgb(228, 229, 247);
         }
+
         a {
             text-decoration: none;
         }
@@ -26,8 +27,10 @@
             padding: 1.8rem;
             box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
         }
+
     </style>
 </head>
+
 <body>
     <div class="card">
         <form action="logme-in" method="POST">
@@ -46,4 +49,5 @@
         </form>
     </div>
 </body>
+
 </html>
