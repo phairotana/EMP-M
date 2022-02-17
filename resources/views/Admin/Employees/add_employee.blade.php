@@ -28,17 +28,18 @@
                             <label for="form-label">Department</label>
                             <select name="department_id" data-required="1" class="form-control">
                                 @foreach ($employee as $item)
-                                    <option value="{{ $item->id }}"> {{ $item->title }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="form-label">Salary</label>
-                            <select class="form-control" name="gender">
-                                <option value="Months">months</option>
-                                <option value="Days">days</option>
+                            <label for="form-label">Salary Type</label>
+                            <select name="salary_id" data-required="1" class="form-control">
+                                @foreach ($employee as $item)
+                                    <option value="{{ $item->id }}">{{ $item->salary }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">

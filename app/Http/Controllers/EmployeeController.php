@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Salary;
 
 class EmployeeController extends Controller
 {
@@ -16,8 +17,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-         $employees = Employee::with('department','salary')->get();
-        // $employees = Employee::all();
+        $employees = Employee::with('department')->get();
+        $employees = Employee::with('salary')->get();
+        $employees = Employee::all();
+        // Employee::with(['department', 'salary'])->get();
         return view('Admin.Employees.emlpoyee_list',compact('employees'));
     }
 
@@ -28,6 +31,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+
+        $employee = Salary::all();
         $employee = Department::all();
 
         return view('Admin.Employees.add_employee',compact('employee'));
@@ -49,7 +54,7 @@ class EmployeeController extends Controller
         $employee->email = request('email');
         $employee->address = request('address');
         $employee->department_id = request('department_id');
-        $employee->salary = request('salary');
+        $employee->salary_id = request('salary_id');
         $employee->amount = request('amount');
         $employee->join_date = request('join_date');
         $employee->end_date = request('end_date');
@@ -108,7 +113,7 @@ class EmployeeController extends Controller
         $employee->email = request('email');
         $employee->address = request('address');
         $employee->department_id = request('department_id');
-        $employee->salary = request('salary');
+        $employee->salary_id= request('salary_id');
         $employee->amount = request('amount');
         $employee->join_date = request('join_date');
         $employee->end_date = request('end_date');

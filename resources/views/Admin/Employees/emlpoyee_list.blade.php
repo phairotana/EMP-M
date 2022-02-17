@@ -19,7 +19,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Department</th>
-                    <th scope="col">Salary</th>
+                    <th scope="col">Salary Type</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Join Date</th>
                     <th scope="col">End Date</th>
@@ -40,7 +40,7 @@
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->address }}</td>
                         <td>{{ optional($employee->department)->title}}</td>
-                        <td>{{ $employee->salary }}</td>
+                        <td>{{ optional($employee->salary)->salary }}</td>
                         <td>{{ $employee->amount }}</td>
                         <td>{{ $employee->join_date }}</td>
                         <td>{{ $employee->end_date }}</td>

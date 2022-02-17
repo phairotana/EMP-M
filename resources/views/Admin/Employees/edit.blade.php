@@ -35,9 +35,9 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="form-label">Salary</label>
-                            <input type="text" class="form-control" placeholder="salary" name="salary"
-                                value="{{ $employee->salary }}">
+                            <label for="form-label">Salary Type</label>
+                            <input type="text" class="form-control" placeholder="" name="salary"
+                            value="{{ $employee->salary->salary }}">
                         </div>
                         <div class="col-md-6">
                             <label for="form-label">Amount</label>
