@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Salary;
 use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Salary;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -31,16 +32,13 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-
-        $employee = Salary::all();
+        $salaries = Salary::all();
         $employee = Department::all();
-
-        return view('Admin.Employees.add_employee',compact('employee'));
+        return view('Admin.Employees.add_employee',compact('salaries','employee'));
     }
 
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-
 
         $filePath = '';
         if($request->file()) {
@@ -77,8 +75,12 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
+
+
+        $employee = Employee::with(['department','salary'])->find($id);
         return view('Admin.Employees.show', compact('employee'));
+
+
     }
 
     /**
@@ -90,7 +92,10 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id);
-        return view('Admin.Employees.edit', compact('employee'));
+        $department = Department::all()->pluck('title','id');
+        $salary = Salary::all()->pluck('salary','id');
+        // dd( $department);
+        return view('Admin.Employees.edit', compact('employee','department','salary'));
     }
 
     /**
@@ -100,7 +105,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmployeeRequest $request, $id)
     {
         $filePath = '';
         if($request->file()) {
