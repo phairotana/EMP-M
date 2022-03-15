@@ -84,5 +84,6 @@ Route::group(
         Route::get('salary-list/{id}', 'SalaryController@destroy');
 
     });
-
+    Route::get('audits', 'AuditController@index')
+    ->middleware('auth', \App\Http\Middleware\AllowOnlyAdmin::class);
 
