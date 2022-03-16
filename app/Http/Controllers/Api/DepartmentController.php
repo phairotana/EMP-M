@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\DepartmentResource;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,14 @@ class DepartmentController
      */
     public function index()
     {
-        $departments = Department::paginate(5);
-        return response()->json($departments);
-       
+
+        $newQuery = (new Department)->newQuery();
+        if(!empty(request()->title))
+        {
+            $newQuery->where('title', 'LIKE', '%' . request()->title . '%');
+        }
+        $data = $newQuery->paginate(5);
+        return DepartmentResource::collection($data);
     }
 
     /**
@@ -84,11 +90,11 @@ class DepartmentController
         Department::find($id)->delete();
         return response()->json(["message" => "Update successful"]);
     }
-    public function search()
-    {
-        $newQuery = (new Department)->newQuery();
-        $newQuery->where('title', 'LIKE', '%' . request()->title . '%');
-        $data = $newQuery->paginate(5);
-        return response()->json($data);
-    }
+    // public function search()
+    // {
+    //     $newQuery = (new Department)->newQuery();
+    //     $newQuery->where('title', 'LIKE', '%' . request()->title . '%');
+    //     $data = $newQuery->paginate(5);
+    //     return DepartmentResource::collection($data);
+    // }
 }

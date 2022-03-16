@@ -1,9 +1,11 @@
 <?php
 
-use App\Models\Department;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\SalaryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +28,11 @@ Route::post('departments',[DepartmentController::class, 'store']);
 Route::put('departments/{id}',[DepartmentController::class, 'update']);
 Route::delete('/departments/{id}',[DepartmentController::class, 'destroy']);
 
-Route::get('search/name',[DepartmentController::class, 'search']);
+// Route::get('search/name',[DepartmentController::class, 'search']);
+
+Route::get('salaries', [SalaryController::class, 'index']);
+Route::get('salary/{id}',[SalaryController::class, 'show']);
+Route::post('salaries', [SalaryController::class, 'store']);
+Route::get('salaries/{id}', [SalaryController::class, 'update']);
+Route::get('/salaries/{id}', [SalaryController::class, 'destroy']);
 

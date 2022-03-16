@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,6 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $department = new Department();
-
         $department->title = request('title');
         $department->detail = request('detail');
         $department->save();
