@@ -10,7 +10,7 @@ class SalaryController
 {
     public function index()
     {
-        $newQuery = (new Salary())->newQuery();
+        $newQuery = (new Salary)->newQuery();
         if(!empty(request()->salary))
         {
             $newQuery->where('salary', 'LIKE', '%' . request()->salary . '%');
@@ -43,10 +43,10 @@ class SalaryController
     }
     public function update(Request $request, $id)
     {
+        dd(99);
         $salary = $request->all();
         Salary::where('id',$id)->update($salary);
         return response()->json(["message" => "Update successful"]);
-
     }
     public function destroy($id)
     {

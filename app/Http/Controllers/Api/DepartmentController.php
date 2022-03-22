@@ -2,51 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\DepartmentResource;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Repositories\DepartmentRepository;
 
 class DepartmentController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(DepartmentRepository $DepartmentRepository){
+        $this->DepartmentRepository = $DepartmentRepository;
+
+    }
+
     public function index()
     {
+        return $this->DepartmentRepository->index();
 
-        $newQuery = (new Department)->newQuery();
-        if(!empty(request()->title))
-        {
-            $newQuery->where('title', 'LIKE', '%' . request()->title . '%');
-        }
-        $data = $newQuery->paginate(5);
-        return DepartmentResource::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $department = new Department;
-        $department->title = $request->title;
-        $department->detail = $request->detail;
-        $department->save();
-
-        return response()->json(["message" => "Create successful"]);
+        return $this->DepartmentRepository->store($request);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $department = Department::find($id);
@@ -63,38 +40,15 @@ class DepartmentController
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id )
     {
-        $department = $request->all();
-        Department::where('id',$id)->update($department);
-        return response()->json(["message" => "Update successful"]);
+        return $this->DepartmentRepository->update($request, $id);
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        // $department = $request->all();
-        Department::find($id)->delete();
-        return response()->json(["message" => "Update successful"]);
+       return $this->DepartmentRepository->delete($id);
     }
-    // public function search()
-    // {
-    //     $newQuery = (new Department)->newQuery();
-    //     $newQuery->where('title', 'LIKE', '%' . request()->title . '%');
-    //     $data = $newQuery->paginate(5);
-    //     return DepartmentResource::collection($data);
-    // }
+
 }
