@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\AuthenticateController;
@@ -87,3 +88,6 @@ Route::group(
     Route::get('audits', 'AuditController@index')
     ->middleware('auth', \App\Http\Middleware\AllowOnlyAdmin::class);
 
+    Route::get('home', [ProductController::class, 'getProducts']);
+
+    Route::get('/products/create-pdf', [ProductController::class, 'exportPDF']);
